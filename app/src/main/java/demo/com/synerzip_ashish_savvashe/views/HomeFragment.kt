@@ -154,7 +154,7 @@ class HomeFragment : BaseFragment() {
 
         val currentWeather: weatherresponse = data
 
-        //binding.searchEditText.setText(" ")
+        binding.searchEditText.setText(" ")
         binding.cityName.text =  currentWeather.name
         binding.descriptionTextView.text = AppUtil.getWeatherStatus(currentWeather.weather?.get(0)!!.id)
         binding.humidityTextView.text = currentWeather.main!!.humidity.toString()+"%"
