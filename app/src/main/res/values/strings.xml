@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Synerzip_Ashish_Savvashe</string>
+    <string name="humidity_label">Humidity</string>
+    <string name="max_temp">Max Temp:</string>
+    <string name="min_temp">Min Temp:</string>
+    <string name="see_level">See Level:</string>
+    <string name="ground_level">Ground Level:</string>
+    <string name="wind_label">Wind</string>
+    <string name="no_internet">No Internet Available</string>
+    <string name="api_error">Api Error Occurred</string>
+    <string name="search">Enter City</string>
+    <string name="search_msg">Enter City Name.</string>
+</resources>
