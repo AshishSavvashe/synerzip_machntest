@@ -1,8 +1,7 @@
 package demo.com.synerzip_ashish_savvashe.network
 
 import com.google.gson.JsonObject
-import demo.com.synerzip_ashish_savvashe.viewmodel.ResultDataModel
-import org.json.JSONObject
+import dagger.Component
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

@@ -2,6 +2,8 @@ package demo.com.synerzip_ashish_savvashe.network
 
 
 import com.google.gson.GsonBuilder
+import dagger.Module
+import dagger.Provides
 import demo.com.synerzip_ashish_savvashe.constant.BASE_URL
 import demo.com.synerzip_ashish_savvashe.constant.NETWORK_TIMEOUT
 import okhttp3.OkHttpClient
@@ -11,11 +13,14 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 import java.util.concurrent.TimeUnit
 
+@Module
 object ApiClient {
 
     private var retrofit: Retrofit? = null
 
-    val client: Retrofit
+
+     val client: Retrofit
+         @Provides
         get() {
 
             val interceptor = HttpLoggingInterceptor()

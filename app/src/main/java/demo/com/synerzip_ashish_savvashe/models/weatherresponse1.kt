@@ -1,13 +1,18 @@
 package demo.com.synerzip_ashish_savvashe.models
 
 import androidx.room.*
+import dagger.Module
+import dagger.Provides
 import java.io.Serializable
-import java.util.*
+import javax.inject.Singleton
 
+@Module
 @Entity(tableName = "weather_response1")
 
  class weatherresponse1: Serializable{
-   @PrimaryKey(autoGenerate = true)
+  @Singleton
+
+  @PrimaryKey(autoGenerate = true)
    @ColumnInfo(name = "id")
    var id: Int = 0
 

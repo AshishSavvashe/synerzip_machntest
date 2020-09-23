@@ -17,6 +17,7 @@ import demo.com.synerzip_ashish_savvashe.utils.AppUtil
 import demo.com.synerzip_ashish_savvashe.viewmodel.ResultDataModel
 import java.util.*
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
 
 class HomeFragment : BaseFragment() {
@@ -26,6 +27,8 @@ class HomeFragment : BaseFragment() {
     var mConstraints: Constraints? = null
     lateinit var viewModel:ResultDataModel
     var locallySavedDate:String? = null
+
+    var isApicall:Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -85,10 +88,11 @@ class HomeFragment : BaseFragment() {
 
         binding.btnSearch.setOnClickListener {
 
-            if(binding.searchEditText.text.isNullOrEmpty()){
+            if(binding.searchEditText.text.toString().isEmpty()|| binding.searchEditText.text.toString() == " " ){
                 showSnack(view!!,getString(R.string.search_msg))
             }else{
                 if(isNetworkConnected(activity!!)){
+                    isApicall = true
                     init()
                 }else{
                     showSnack(view!!,getString(R.string.no_internet))
@@ -99,19 +103,19 @@ class HomeFragment : BaseFragment() {
 
 
     private fun init() {
-
-        viewModel?.let { it ->
-
-            it.getCityWiseData(binding.cityName.text.toString()).observe(activity!!, Observer {
-                if(it!=null){
-                    var data = Gson().fromJson(it.response , weatherresponse::class.java)
-                    locallySavedDate = it.currentDate
-                    seWeathertData(data )
-                }else{
-                        callData(binding.searchEditText.text.toString())
-                }
-            })
-        }
+            viewModel?.let { it ->
+                it.getCityWiseData(binding.cityName.text.toString()).observe(activity!!, Observer {
+                    if(it!=null){
+                        var data = Gson().fromJson(it.response , weatherresponse::class.java)
+                        locallySavedDate = it.currentDate
+                        seWeathertData(data )
+                    }else{
+                        if(isApicall) {
+                            callData(binding.searchEditText.text.toString())
+                        }
+                    }
+                })
+            }
     }
 
     /*
@@ -140,7 +144,6 @@ class HomeFragment : BaseFragment() {
                     }
                 })
             }
-
         }
         else {
             showSnack(view!!,getString(R.string.no_internet))
@@ -152,6 +155,7 @@ class HomeFragment : BaseFragment() {
     * */
     private fun seWeathertData(data: weatherresponse) {
 
+        isApicall = false
         val currentWeather: weatherresponse = data
 
         binding.searchEditText.setText(" ")
@@ -159,7 +163,6 @@ class HomeFragment : BaseFragment() {
         binding.descriptionTextView.text = AppUtil.getWeatherStatus(currentWeather.weather?.get(0)!!.id)
         binding.humidityTextView.text = currentWeather.main!!.humidity.toString()+"%"
         binding.windTextView.text = "%.0f km/hr".format(currentWeather.wind!!.speed)
-
 
         binding.tempTextView.text = "%.0f°".format(currentWeather.main!!.temp)
         binding.tvMaxTemp.text = currentWeather.main!!.temp_max.toString()

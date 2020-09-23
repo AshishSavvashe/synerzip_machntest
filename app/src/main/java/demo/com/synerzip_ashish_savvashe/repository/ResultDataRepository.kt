@@ -5,6 +5,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.os.AsyncTask
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
@@ -26,7 +27,8 @@ class ResultDataRepository(application: Application): CoroutineScope by MainScop
      private val resultDao: ResponseDao
 
     val retrofit = ApiClient.client
-    val requestInterface = retrofit.create(ApiInterface::class.java)
+
+     val requestInterface = retrofit.create(ApiInterface::class.java)
 
     init {
         val database = AppDatabase.getDatabase(application)
@@ -34,6 +36,7 @@ class ResultDataRepository(application: Application): CoroutineScope by MainScop
         responseModelData = MutableLiveData()
     }
 
+    @Throws(Exception::class)
      fun getWeatherDataa(cityName: String, context: Context): MutableLiveData<weatherresponse>{
 
         val accessTokenCall: Call<JsonObject> = requestInterface.getCurrentWeather(q = cityName,appId =  "f2508fbce2edb3c268faf18d96e39a48")
@@ -62,7 +65,7 @@ class ResultDataRepository(application: Application): CoroutineScope by MainScop
                         InsertAllAsyncTask(resultDao).execute(inserObject)
 
                     } else {
-                       // Toast. makeText(context, " No Record Data Found", Toast. LENGTH_LONG).show()
+                        Toast. makeText(context, " No Record Data Found", Toast. LENGTH_LONG).show()
                     }
                 }
 

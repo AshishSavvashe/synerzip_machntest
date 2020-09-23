@@ -1,6 +1,6 @@
 package demo.com.synerzip_ashish_savvashe.models
 
-data class Main(
+ class Main(
     var id: Int ,
     var feels_like: Double,
     var grnd_level: Int,
