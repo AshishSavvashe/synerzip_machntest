@@ -27,7 +27,7 @@ class UiTest {
         val appContext =
             InstrumentationRegistry.getTargetContext()
         Assert.assertEquals(
-            "com.journaldev.androidexpressobasics",
+            "com.androidexpressobasics",
             appContext.packageName
         )
     }

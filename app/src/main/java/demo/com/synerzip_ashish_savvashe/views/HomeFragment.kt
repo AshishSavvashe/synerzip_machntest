@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.work.*
+import com.google.firebase.database.*
 import com.google.gson.Gson
 import demo.com.synerzip_ashish_savvashe.R
 import demo.com.synerzip_ashish_savvashe.WorkManager.NotificationWorker
@@ -17,7 +18,7 @@ import demo.com.synerzip_ashish_savvashe.utils.AppUtil
 import demo.com.synerzip_ashish_savvashe.viewmodel.ResultDataModel
 import java.util.*
 import java.util.concurrent.TimeUnit
-import javax.inject.Inject
+import demo.com.synerzip_ashish_savvashe.models.firebasesave as firebasesave1
 
 
 class HomeFragment : BaseFragment() {
@@ -29,6 +30,8 @@ class HomeFragment : BaseFragment() {
     var locallySavedDate:String? = null
 
     var isApicall:Boolean = false
+    private var mDatabase: DatabaseReference? = null
+    var inserObject = firebasesave1()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,6 +41,9 @@ class HomeFragment : BaseFragment() {
 
         mWorkManager = WorkManager.getInstance(activity!!)
         viewModel = ViewModelProviders.of(this).get(ResultDataModel::class.java)
+
+        //get reference to the "users" node
+        mDatabase = FirebaseDatabase.getInstance().reference
 
         initWorkManager()
         initSearchView()
@@ -103,7 +109,7 @@ class HomeFragment : BaseFragment() {
 
 
     private fun init() {
-            viewModel?.let { it ->
+            /*viewModel?.let { it ->
                 it.getCityWiseData(binding.cityName.text.toString()).observe(activity!!, Observer {
                     if(it!=null){
                         var data = Gson().fromJson(it.response , weatherresponse::class.java)
@@ -115,7 +121,9 @@ class HomeFragment : BaseFragment() {
                         }
                     }
                 })
-            }
+            }*/
+
+        callData(binding.searchEditText.text.toString())
     }
 
     /*
@@ -133,8 +141,9 @@ class HomeFragment : BaseFragment() {
                             seWeathertData(apiResponse )
                             binding.todayMaterialCard.visibility = View.VISIBLE
                             binding.CVtemprature.visibility = View.VISIBLE
-
                             binding.imgNoCity.visibility = View.GONE
+
+
                         }else{
                             binding.todayMaterialCard.visibility = View.GONE
                             binding.CVtemprature.visibility = View.GONE
@@ -156,7 +165,20 @@ class HomeFragment : BaseFragment() {
     private fun seWeathertData(data: weatherresponse) {
 
         isApicall = false
-        val currentWeather: weatherresponse = data
+
+       val id: String? = mDatabase!!.push().key
+
+
+
+       inserObject.id = 0
+       inserObject.city_name = binding.searchEditText.text.toString()
+       inserObject.response = data
+       inserObject.currentDate = System.currentTimeMillis().toString()
+
+       //Saving the Artist
+       mDatabase!!.child(id!!).setValue(inserObject);
+
+       val currentWeather: weatherresponse = data
 
         binding.searchEditText.setText(" ")
         binding.cityName.text =  currentWeather.name
@@ -176,6 +198,23 @@ class HomeFragment : BaseFragment() {
             )
         )
         binding.animationView.playAnimation()
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        mDatabase!!.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (postSnapshot in dataSnapshot.children) {
+                    val alldata: String = postSnapshot.child("response").value.toString()
+
+                   // showSnack(view!!,alldata)
+
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {}
+        })
     }
 
     companion object {

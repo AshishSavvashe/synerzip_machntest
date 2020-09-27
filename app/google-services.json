@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "904237033840",
+    "firebase_url": "https://mytask-ef741.firebaseio.com",
+    "project_id": "mytask-ef741",
+    "storage_bucket": "mytask-ef741.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:904237033840:android:7e8c87001d403f050dc7b5",
+        "android_client_info": {
+          "package_name": "demo.com.synerzip_ashish_savvashe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "904237033840-obit6pnb43jjbojdd0u1n2h1kmag23sb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "demo.com.synerzip_ashish_savvashe",
+            "certificate_hash": "562391c1cbb90a9de34b8f5866591ed3c26dbff1"
+          }
+        },
+        {
+          "client_id": "904237033840-hb6b8hh2657b5g0mav002gueapcca9kj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzDbWrm7LwYQRKP7ngsif1pmq-0nmcHL8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "904237033840-hb6b8hh2657b5g0mav002gueapcca9kj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

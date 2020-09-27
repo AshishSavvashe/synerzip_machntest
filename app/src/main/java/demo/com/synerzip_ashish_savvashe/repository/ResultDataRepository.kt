@@ -8,6 +8,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.database.DatabaseReference
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import demo.com.synerzip_ashish_savvashe.database.AppDatabase
@@ -26,9 +27,10 @@ class ResultDataRepository(application: Application): CoroutineScope by MainScop
      var responseModelData: MutableLiveData<weatherresponse> = MutableLiveData()
      private val resultDao: ResponseDao
 
-    val retrofit = ApiClient.client
-
+     val retrofit = ApiClient.client
      val requestInterface = retrofit.create(ApiInterface::class.java)
+
+
 
     init {
         val database = AppDatabase.getDatabase(application)
@@ -57,12 +59,12 @@ class ResultDataRepository(application: Application): CoroutineScope by MainScop
 
                         responseModelData.value = response1
 
-                        var inserObject = weatherresponse1()
+                        /*var inserObject = weatherresponse1()
                         inserObject.id = 0
                         inserObject.city_name = cityName
-                        inserObject.response = response.body().toString()
+                        inserObject.response = response1
                         inserObject.currentDate = System.currentTimeMillis().toString()
-                        InsertAllAsyncTask(resultDao).execute(inserObject)
+                        InsertAllAsyncTask(resultDao).execute(inserObject)*/
 
                     } else {
                         Toast. makeText(context, " No Record Data Found", Toast. LENGTH_LONG).show()
