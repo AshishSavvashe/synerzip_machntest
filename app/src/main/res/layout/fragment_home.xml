@@ -326,6 +326,17 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
+
+    <androidx.recyclerview.widget.RecyclerView
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/todayMaterialCard"
+        android:id="@+id/homeRv"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_15sdp"
+        android:layout_height="wrap_content" />
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

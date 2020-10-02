@@ -13,4 +13,17 @@ interface ApiInterface {
         @Query("q") q: String?,
         @Query("appid") appId: String?
     ): Call<JsonObject>
+
+    @GET("forecast?")
+    fun getWeatherData5days(
+        @Query("q") q: String?,
+        @Query("appid") appId: String?
+    ): Call<JsonObject>
+
+    @GET("weather?")
+    fun getCurrentWeatheronlatlog(
+        @Query("lat") lat: String?,
+        @Query("lon") lon: String?,
+        @Query("appid") appId: String?
+    ): Call<JsonObject>
 }

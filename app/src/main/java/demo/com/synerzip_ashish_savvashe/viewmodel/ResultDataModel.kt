@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import demo.com.synerzip_ashish_savvashe.models.weatherresponse
 import demo.com.synerzip_ashish_savvashe.models.weatherresponse1
+import demo.com.synerzip_ashish_savvashe.models.weatherresponse4NextFiveDays
 import demo.com.synerzip_ashish_savvashe.repository.ResultDataRepository
 
 
@@ -29,5 +30,13 @@ class ResultDataModel(application: Application): AndroidViewModel(application) {
 
      fun getCityWiseData(cityName: String): LiveData<weatherresponse1> {
        return mRepository.allcitywiseData(cityName)
+    }
+
+    fun getWeatherDatafromlatlong(latitude: Double, longitude: Double,context:Context) : MutableLiveData<weatherresponse> {
+        return mRepository.getWeatherDataalatlong(latitude,longitude,context)
+    }
+
+    fun getWeatherData5FiveDays(cityName: String ,context:Context): MutableLiveData<weatherresponse4NextFiveDays> {
+        return mRepository.getWeatherData5FiveDays(cityName,context)
     }
 }

@@ -8,6 +8,7 @@
     <string name="wind_label">Wind</string>
     <string name="no_internet">No Internet Available</string>
     <string name="api_error">Api Error Occurred</string>
+    <string name="no_data">Something went wrong.</string>
     <string name="search">Enter City</string>
     <string name="search_msg">Enter City Name.</string>
 </resources>
