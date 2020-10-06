@@ -100,3 +100,4 @@ dependencies {
     kapt 'com.google.dagger:dagger-compiler:2.9'
 
 }
+apply plugin: 'com.google.gms.google-services'
