@@ -86,7 +86,7 @@ class ResultDataRepository(application: Application): CoroutineScope by MainScop
                         InsertAllAsyncTask(resultDao).execute(inserObject)
 
                     } else {
-                        Toast. makeText(context, " No Record Data Found", Toast. LENGTH_LONG).show()
+                       // Toast. makeText(context, " No Record Data Found", Toast. LENGTH_LONG).show()
                     }
                 }
 
